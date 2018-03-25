@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- include axios for ajax requests -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  </head>
+  <body>
+    <h1>Press one.</h1>
+    <button onclick="pressButton(1)">Button 1</button>
+    <button onclick="pressButton(2)">Button 2</button>
+    <button onclick="pressButton(3)">Button 3</button>
+    <hr>
+
+    <div id="server_response"></div>
+
+    <script>
+      function pressButton(button) {
+        axios.post('/buttonPressed', {button: button}).then( response => {
+          console.log(response);
+          document.getElementById('server_response').innerHTML = response.data.message;
+        }).catch( err => {
+          console.error(err);
+        })
+      }
+    </script>
+
+  </body>
+</html>
